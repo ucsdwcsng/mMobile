@@ -1,6 +1,7 @@
 
-
-%======================================
+% Ish jain
+% ikjain@ucsd.edu
+% Analyse mMobile data and plot CIR and beam RSS
 
 foldername = "dataset/";
 titlelist = {'Indoor 2.5m', 'Indoor 4.16m', 'Outdoor 10m', 'Outdoor 30m'};
@@ -11,9 +12,10 @@ link_length_list = [2.5,4.2,10,30];
 orientation_list = [0,0,0,30];
 %--------------------------------------
 
-fileidx = 4; %1,2 are indoor and 3,4 are outdoors 
+fileidx = 1; %1,2 are indoor and 3,4 are outdoors
 
-filename = foldername+matfilelist(fileidx);
+matfile=matfilelist(fileidx);
+filename = foldername+matfile;
 load(filename); %loads 'rssi', 'rx_h_est_vec'
 
 npoints = nPointList(fileidx);
@@ -29,14 +31,20 @@ trxangle = atand(d*cosd(orient)/trxlen+d*sind(orient));
 loc=1; %user location for plotting
 beamidx=1; %beam index for plotting
 
+% interpolate the CIR
+[rx_h_est_interp] = cosineInterpolateCIR(rx_h_est_vec(loc,beamidx,:));
+
 % 240kHz subcarrier spacing for 256 subcarriers with 80% subcarriers loaded
 % with data
 BW = 240000*256*.8; %Hz
-time_axis = 0:1/BW:255/BW; 
+time_axis = 0:1/BW:255/BW;
 figure(1); clf;
 plot(time_axis*1e9,squeeze(db(rx_h_est_vec(loc,beamidx,:))))
+grid on;
 xlabel('time (ns)')
 ylabel('CIR (dB)')
+title(sprintf('CIR for user location %d and beam index %d',loc,beamidx))
+% saveas(gcf,pwd+"/figures/"+matfile+"_CIR.png")
 
 figure(2);clf;
 imagesc(0:30,trxangle,rssi); axis xy
@@ -44,3 +52,5 @@ ylabel('User Locations (degree)')
 xlabel('Beam angle (degree)')
 colorbar;
 title(['RSS power (dB)| ', titlename])
+
+% saveas(gcf,pwd+"/figures/"+matfile+"_RSS.png")

@@ -1,5 +1,5 @@
 # mMobile Mobility Dataset
-Dataset for mMobile: Building a mmWave testbed to evaluate and address mobility effects [mmNets'20]
+Dataset for [mMobile: Building a mmWave testbed to evaluate and address mobility effects](https://wcsng.ucsd.edu/mmobile/) published in [mmNets'20]
 
 ### Overview
 We relese 28 GHz full channel (CSI) measurements for a mobile user. The CSI data is tagged with each user location and for each beam index. The CSI consists of 256 subcarriers with a sub-carrier spacing of 240 kHz requisite by 5G NR standards. 

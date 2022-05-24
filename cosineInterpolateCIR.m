@@ -33,9 +33,9 @@ if(wannaplot)
     plot(1:length(h_in),db(h_in), 'linewidth',2)
     hold on; grid on;
     plot((1:sps*length(h_in))/sps,db(h_out), 'linewidth',2);
-    plot((1:sps*length(h_in))/sps, db(h_out_zeropad), 'linewidth',2)
-    legend('h original', 'h cosine interpolated', 'h zeropad method')
-    xlabel('time samples')
+    % plot((1:sps*length(h_in))/sps, db(h_out_zeropad), 'linewidth',2)
+    legend('h original', 'h cosine interpolated')%, 'h zeropad method')
+    xlabel('Time samples')
     ylabel('CIR (dB)')
 end
 

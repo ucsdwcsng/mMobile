@@ -32,7 +32,8 @@ loc=1; %user location for plotting
 beamidx=1; %beam index for plotting
 
 % interpolate the CIR
-[rx_h_est_interp] = cosineInterpolateCIR(rx_h_est_vec(loc,beamidx,:));
+channel_vector = squeeze(rx_h_est_vec(loc,beamidx,:));
+[rx_h_est_interp] = cosineInterpolateCIR(channel_vector);
 
 % 240kHz subcarrier spacing for 256 subcarriers with 80% subcarriers loaded
 % with data
